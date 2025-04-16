@@ -1,4 +1,4 @@
-from Prompt_Blacklist import prompt_blacklist
+from app.qwfuzzer.Prompt_Blacklist import prompt_blacklist
 from mutator_check import PromptMutator
 from .config import qw_api_key, gj_api_key
 

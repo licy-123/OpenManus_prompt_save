@@ -1,7 +1,7 @@
 import random
 import requests
 from openai import OpenAI
-from .config import qw_api_key, gj_api_key
+from app.qwfuzzer.config import qw_api_key, gj_api_key
 
 
 class PromptMutator:

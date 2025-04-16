@@ -3,7 +3,7 @@ from scipy.spatial.distance import cosine
 from pathlib import Path
 import json
 import requests
-from .config import gj_api_key
+from app.qwfuzzer.config import qw_api_key, gj_api_key
 
 class PromptBlacklist:
     """
