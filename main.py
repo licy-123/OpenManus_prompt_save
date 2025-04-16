@@ -20,6 +20,8 @@ async def main():
         if res is True:
             print(f"你输入的提示词具有越狱风险，请重新输入安全的提示词")
             return
+        elif res is False:
+            print(1)
 
         logger.warning("Processing your request...")
         await agent.run(prompt)
