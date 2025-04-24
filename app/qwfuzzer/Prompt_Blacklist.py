@@ -10,17 +10,17 @@ class PromptBlacklist:
     用于黑名单的一系列操作包括取出，加入，持久维护，词嵌入，以及计算余弦相似度等等
     """
     def __init__(self, gj_api_key):
+        self.gj_api_key = gj_api_key
         self.file_path = Path(__file__).with_name("prompt_blacklist.json")
         self.prompts = self._load()
         self._precompute_embeddings()
-        self.gj_api_key = gj_api_key
 
 
     def call_embedding_model(self, input, model='BAAI/bge-large-zh-v1.5'):
         """
         用于将输入的input词嵌入成词向量
         """
-        url = "https://api.siliconflow.cn/v1/chat/completions"
+        url = "https://api.siliconflow.cn/v1/embeddings" #"https://api.siliconflow.cn/v1/chat/completions"
 
         payload = {
             "model": "BAAI/bge-large-zh-v1.5",
@@ -32,9 +32,12 @@ class PromptBlacklist:
             "Content-Type": "application/json"
         }
 
-        response = requests.request("POST", url, json=payload, headers=headers)
+        response = requests.request("POST", url, json=payload, headers=headers,)
 
-        return response.text
+        data = response.json()
+
+        # return response.text
+        return data['data'][0]['embedding']
 
     def _precompute_embeddings(self):
         """
