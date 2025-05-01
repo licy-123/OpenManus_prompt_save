@@ -11,16 +11,16 @@ async def main():
     mutator = PromptMutator(qw_api_key=qw_api_key, gj_api_key=gj_api_key)
     try:
         prompt = input("Enter your prompt: ")
-
         if not prompt.strip():
             logger.warning("Empty prompt provided.")
             return
+        """第一重防御,黑名单防御"""
         res = prompt_blacklist.check_similarity(prompt, threshold=0.75)
         if res is True:
             print(f"你输入的提示词具有越狱风险，请重新输入安全的提示词")
             return
         else:
-            """通过了黑名单检测，还要进行大模型检测"""
+            """第二重防御,大模型防御"""
             ans = mutator.check_safety(prompt)
             if ans is False:
                 print(f"你输入的提示词具有越狱风险，请重新输入安全的提示词")
