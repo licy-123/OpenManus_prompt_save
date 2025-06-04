@@ -27,7 +27,7 @@ class MCPAgent(ToolCallAgent):
     mcp_clients: MCPClients = Field(default_factory=MCPClients)
     available_tools: MCPClients = None  # Will be set in initialize()
 
-    max_steps: int = 20
+    max_steps: int = 3
     connection_type: str = "stdio"  # "stdio" or "sse"
 
     # Track tool schemas to detect changes
